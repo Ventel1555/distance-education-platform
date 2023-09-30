@@ -8,4 +8,4 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # в дальнейшем использовать LoginRequiredMixin
 def home(request):
-    return render(request, "base.html")
+    return render(request, "add_base.html")
