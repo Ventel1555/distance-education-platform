@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark bg-dark">
     <div class="container-fluid">
       <div width="16" height="16" class="special-div"></div>
-      <a class="navbar-brand text-bg-dark" href="#">Distance-Education-Platform</a>
+      <a class="navbar-brand text-bg-dark" href="{% url 'home' %}">Distance-Education-Platform</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,12 +13,21 @@
           <li class="nav-item">
             <a class="nav-link text-bg-dark" href="#">Заявки</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-bg-dark" href="#">Документы</a>
+          </li>
         </ul>
         <div class="navbar-nav">
-          <a class="nav-link" aria-current="page" style="margin-right: 5px;">Username!</a>
+          {% if user.is_authenticated %}
+          <a class="nav-link" aria-current="page" style="margin-right: 5px;">{{ user.first_name}} {{user.last_name}} - ученик | преподователь</a>
           <div class="d-flex">
-              <a class="btn btn-outline-secondary" href="#">Войти | Выйти</a>
+              <a class="btn btn-outline-secondary" href="{% url 'logout_view'%}">Выйти</a>
           </div>
+          {% else %}
+          <div class="d-flex">
+            <a class="btn btn-outline-secondary" href="{% url 'login_view'%}">Войти</a>
+          </div>
+          {% endif %}
       </div>
       </div>
     </div>
