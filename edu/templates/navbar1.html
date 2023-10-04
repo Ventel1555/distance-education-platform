@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse text-bg-dark" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active text-bg-dark" aria-current="page" href="#">Задания</a>
+            <a class="nav-link text-bg-dark" href="{% url 'for_teachers' %}">Для учителя</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Заявки</a>
+            <a class="nav-link text-bg-dark" href="{% url 'for_students' %}">Для ученика</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Документы</a>
+            <a class="nav-link disabled" aria-disabled="true">Для администрации</a>
           </li>
         </ul>
         <div class="navbar-nav">

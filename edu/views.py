@@ -9,3 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # в дальнейшем использовать LoginRequiredMixin
 def home(request):
     return render(request, "add_base.html")
+
+def students(request):
+    return render(request, "for_students.html")
+
+def teachers(request):
+    return render(request, "for_teachers.html")
