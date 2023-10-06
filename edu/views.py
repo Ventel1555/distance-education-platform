@@ -15,3 +15,9 @@ def students(request):
 
 def teachers(request):
     return render(request, "for_teachers.html")
+
+def help_page(request):
+    return render(request, "help_page.html")
+
+def admin_panel(request):
+    return render(request, "for_admin.html")

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -10,9 +8,9 @@ from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     CHOICES_ROLE = (
-    ('S', 'Student'),
-    ('T', 'Teacher'),
-    ('A', 'Admin'),
+    ('S', 'Ученик'),
+    ('T', 'Учитель'),
+    ('A', 'Администратор'),
     )
     login = models.CharField(_('login name'), max_length=18, unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
