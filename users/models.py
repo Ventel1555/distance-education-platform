@@ -9,16 +9,23 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
+    CHOICES_ROLE = (
+    ('S', 'Student'),
+    ('T', 'Teacher'),
+    ('A', 'Admin'),
+    )
+    login = models.CharField(_('login name'), max_length=18, unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_active = models.BooleanField(_('active'), default=True)
+    role = models.CharField(_('role'), max_length=8, choices=CHOICES_ROLE)
+    feedback = models.BooleanField(_('feedback access'), default=False)
     # need to discusings!!!...
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = []
 
     class Meta:
