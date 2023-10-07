@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
 
 # в дальнейшем использовать LoginRequiredMixin
+
+# urls for main_html dir
 def home(request):
     return render(request, "main_html/add_base.html")
 
@@ -28,3 +30,7 @@ def admin_panel(request):
         return render(request, "main_html/for_admin.html")
     else:
         return HttpResponseForbidden()
+
+# urls for students dir
+# def list_homework(request):
+#     return render(request, "students/list_homework.html")
