@@ -1,23 +1,30 @@
 from django.shortcuts import render
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 
 # в дальнейшем использовать LoginRequiredMixin
 def home(request):
-    return render(request, "add_base.html")
+    return render(request, "main_html/add_base.html")
 
 def students(request):
-    return render(request, "for_students.html")
+    if request.user.role == 'S':
+        return render(request, "main_html/for_students.html")
+    else:
+        return HttpResponseForbidden()
 
 def teachers(request):
-    return render(request, "for_teachers.html")
+    if request.user.role == 'T':
+        return render(request, "main_html/for_teachers.html")
+    else:
+        return HttpResponseForbidden()
 
 def help_page(request):
-    return render(request, "help_page.html")
+    return render(request, "main_html/help_page.html")
 
 def admin_panel(request):
-    return render(request, "for_admin.html")
+    if request.user.role == 'A':
+        return render(request, "main_html/for_admin.html")
+    else:
+        return HttpResponseForbidden()
