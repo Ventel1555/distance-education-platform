@@ -3,6 +3,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 
+from edu.models import Classes
+
 from .managers import UserManager
 
 
@@ -13,9 +15,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     ('A', 'Администратор'),
     )
     login = models.CharField(_('login name'), max_length=18, unique=True)
+    email = models.EmailField(_('email'), max_length=28, blank=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    patronymic = models.CharField(_('patronymic'), max_length=30, blank=True)
+    class_id = models.ManyToManyField(Classes, verbose_name=_('class id'))
     is_active = models.BooleanField(_('active'), default=True)
     role = models.CharField(_('role'), max_length=8, choices=CHOICES_ROLE)
     feedback = models.BooleanField(_('feedback access'), default=False)
