@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Редактирование записей</h1>
+    {% for class in classes %}
+        <p>{{class}}</p>
+    {% endfor %}
+    <h1>Test case</h1>
+    {% for class in classes %}
+        <p>{{class.sub_id}}</p>
+    {% endfor %}
+{% endblock content %}
