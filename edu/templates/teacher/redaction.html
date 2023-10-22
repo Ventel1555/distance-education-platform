@@ -4,9 +4,13 @@
     <h1>Редактирование записей</h1>
     {% for class in classes %}
         <p>{{class}}</p>
-    {% endfor %}
-    <h1>Test case</h1>
-    {% for class in classes %}
-        <p>{{class.sub_id}}</p>
-    {% endfor %}
+        <hr>
+        {% for subj in subjects%}
+            <h5>{{subj}}</h5>
+            <hr>
+            {% for lesson in lessons %}
+                {{lesson}}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}    
 {% endblock content %}

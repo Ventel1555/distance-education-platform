@@ -31,10 +31,17 @@ def teachers(request):
 
 def redaction(request):
     if request.user.role == 'T':
-        classes = Classes.objects.filter(id='1',).order_by('id')
+        user_class = request.user.class_id.all().values_list('id',  flat=True)
+        classes = Classes.objects.filter(pk__in=user_class)
+        for subject in classes:
+            subjects = subject.sub_id.all()
+            for lesson in subjects:
+                lessons = lesson.lesson_id.all()
         context = {
             'classes': classes,
-        }
+            'subjects': subjects,
+            'lessons': lessons,
+            }
         return render(request, "teacher/redaction.html", context=context)
     else:
         return HttpResponseForbidden()
