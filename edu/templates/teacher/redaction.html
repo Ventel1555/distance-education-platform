@@ -2,15 +2,59 @@
 
 {% block content %}
     <h1>Редактирование записей</h1>
-    {% for class in classes %}
-        <p>{{class}}</p>
-        <hr>
-        {% for subj in subjects%}
-            <h5>{{subj}}</h5>
-            <hr>
-            {% for lesson in lessons %}
-                {{lesson}}
-            {% endfor %}
-        {% endfor %}
-    {% endfor %}    
+
+    <div class="row grid" style="--bs-columns: 3;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Классы</h3>
+                    <ul class="list-group">
+                        {% for class in classes %}
+                        {% if active_class != None and class == active_class %}
+                        <form method="get" class="list-group">
+                            <button type="submit" class="list-group-item active" name="class_name" value="{{class}}">{{class}} класс</button>
+                        </form>
+                        {% else %}
+                        <form method="get" class="list-group">
+                            <button type="submit" class="list-group-item" name="class_name" value="{{class}}">{{class}} класс</button>
+                        </form>
+                        {% endif %}
+                        <hr>
+                        {% empty %}
+                        <p class="text-center">У вас нет классов, обратитесь к управляющему</p>
+                        {% endfor %}
+                      </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Предметы</h3>
+                    <ul class="list-group container">
+                        {% for subj in subjects%}
+                        <li type="button" class="list-group-item" aria-current="false">{{subj}}</li>
+                        {% empty %}
+                        <h5 class="text-center" >Выберете класс</h5>
+                        {% endfor %}
+                      </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Уроки</h3>
+                    <ul class="list-group">
+                        {% for lesson in lessons %}
+                        <li class="list-group-item">{{lesson}}</li>
+                        {% empty %}
+                        <h5 class="text-center">Выберете предмет</h5>
+                        {% endfor %}
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}

@@ -3,7 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 
-from edu.models import Classes
+from edu.models import Classes, Subjects
 
 from .managers import UserManager
 
@@ -19,7 +19,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('Имя'), max_length=30, blank=True)
     last_name = models.CharField(_('Фамилия'), max_length=30, blank=True)
     patronymic = models.CharField(_('Отчество'), max_length=30, blank=True)
-    class_id = models.ManyToManyField(Classes, verbose_name=_('Классы'))
+    classes_id = models.ManyToManyField(Classes, verbose_name=_('Доступы к классам'))
+    subjects_id = models.ManyToManyField(Subjects, verbose_name=_('Доступы к предметам'))
     is_active = models.BooleanField(_('Активный'), default=True)
     role = models.CharField(_('Роль'), max_length=8, choices=CHOICES_ROLE)
     feedback = models.BooleanField(_('Доступ к обрат. связи'), default=False)
