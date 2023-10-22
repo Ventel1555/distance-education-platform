@@ -26,7 +26,7 @@ class Subjects(models.Model):
     class Meta:
         verbose_name = 'Предмет'
         verbose_name_plural = 'Предметы'
-    
+        
     def __str__(self):
         """
         String for representing the MyModelName object (in Admin site etc.)
@@ -43,6 +43,9 @@ class Classes(models.Model):
         verbose_name = 'Класс'
         verbose_name_plural = 'Классы'
         ordering = ["id"]
+        
+    def get_class(self):
+        return str(self.number) + self.letter
         
     def __str__(self):
         """

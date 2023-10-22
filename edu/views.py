@@ -31,12 +31,14 @@ def teachers(request):
 
 def redaction(request):
     if request.user.role == 'T':
-        user_class = request.user.class_id.all()
+        user_class = request.user.classes_id.all()
         classes = Classes.objects.filter(pk__in=user_class.values_list('id', flat=True))
         class_name = request.GET.get('class_name') or None
         if class_name != None:
             if (int(class_name[0]), class_name[1:]) in user_class.values_list('number', 'letter'):
-                subjects = Subjects.objects.all()
+                sub_access = Classes.objects.all()
+                print(sub_access)
+                subjects = Subjects.objects.filter(pk__in=request.user.subjects_id.all().values_list('id', flat=True) )
                 class_name = Classes.objects.filter(number=int(class_name[0]), letter=class_name[1:])
             else:
                 return HttpResponseForbidden()
