@@ -16,13 +16,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     login = models.CharField(_('Логин'), max_length=18, unique=True)
     email = models.EmailField(_('Почта'), max_length=28, blank=True)
-    first_name = models.CharField(_('Имя'), max_length=30, blank=True)
-    last_name = models.CharField(_('Фамилия'), max_length=30, blank=True)
+    first_name = models.CharField(_('Имя'), max_length=30)
+    last_name = models.CharField(_('Фамилия'), max_length=30)
     patronymic = models.CharField(_('Отчество'), max_length=30, blank=True)
-    classes_id = models.ManyToManyField(Classes, verbose_name=_('Доступы к классам'))
-    subjects_id = models.ManyToManyField(Subjects, verbose_name=_('Доступы к предметам'))
+    classes_id = models.ForeignKey(Classes, related_name=_('Класс'), on_delete=models.CASCADE, blank=True, null=True)
+    subjects_id = models.ManyToManyField(Subjects, verbose_name=_('Доступы к предметам'), blank=True)
     is_active = models.BooleanField(_('Активный'), default=True)
-    role = models.CharField(_('Роль'), max_length=8, choices=CHOICES_ROLE)
+    role = models.CharField(_('Роль'), max_length=8, choices=CHOICES_ROLE, blank=True)
     feedback = models.BooleanField(_('Доступ к обрат. связи'), default=False)
     # need to discusings!!!...
 
@@ -34,19 +34,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+        ordering = ["last_name"]
 
     def get_full_name(self):
         '''
         Returns the first_name plus the last_name, with a space in between.
         '''
-        full_name = '%s %s' % (self.first_name, self.last_name)
+        full_name = '%s %s %s' % (self.first_name, self.last_name, self.patronymic)
         return full_name.strip()
-
-    def get_short_name(self):
-        '''
-        Returns the short name for the user.
-        '''
-        return self.first_name
     
     @property
     def is_staff(self):

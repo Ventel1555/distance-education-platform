@@ -35,7 +35,7 @@ class Subjects(models.Model):
     
     
 class Classes(models.Model):
-    number = models.SmallIntegerField(verbose_name='Номер класса')
+    number = models.CharField(max_length=1, verbose_name='Номер класса')
     letter = models.CharField(max_length=1, verbose_name='Параллель')
     sub_id = models.ManyToManyField(Subjects, verbose_name='Предметы')
     
@@ -45,10 +45,10 @@ class Classes(models.Model):
         ordering = ["id"]
         
     def get_class(self):
-        return str(self.number) + self.letter
+        return self.number + self.letter
         
     def __str__(self):
         """
         String for representing the MyModelName object (in Admin site etc.)
         """
-        return str(self.number) + self.letter
+        return self.number + self.letter

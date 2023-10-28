@@ -3,45 +3,31 @@
 {% block content %}
     <h1>Редактирование записей</h1>
 
-    <div class="row grid" style="--bs-columns: 3;">
-        <div class="col">
+    <div class="row grid">
+        <div class="col-4">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="text-center">Классы</h3>
+                    <h3 class="text-center">Предметы</h3>
                     <ul class="list-group">
-                        {% for class in classes %}
-                        {% if active_class != None and class == active_class %}
+                        {% for subj in subjects%}
+                        {% if subj.name == active_sub %}
                         <form method="get" class="list-group">
-                            <button type="submit" class="list-group-item active" name="class_name" value="{{class}}">{{class}} класс</button>
+                            <button type="submit" class="list-group-item active" name="sub_name" value="{{subj}}">{{subj}} класс</button>
                         </form>
                         {% else %}
                         <form method="get" class="list-group">
-                            <button type="submit" class="list-group-item" name="class_name" value="{{class}}">{{class}} класс</button>
+                            <button type="submit" class="list-group-item" name="sub_name" value="{{subj}}">{{subj}} класс</button>
                         </form>
                         {% endif %}
                         <hr>
                         {% empty %}
-                        <p class="text-center">У вас нет классов, обратитесь к управляющему</p>
+                        <h5 class="text-center">Вам пока не доступен ни один предмет</h5>
                         {% endfor %}
                       </ul>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="text-center">Предметы</h3>
-                    <ul class="list-group container">
-                        {% for subj in subjects%}
-                        <li type="button" class="list-group-item" aria-current="false">{{subj}}</li>
-                        {% empty %}
-                        <h5 class="text-center" >Выберете класс</h5>
-                        {% endfor %}
-                      </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
+        <div class="col-8">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">Уроки</h3>

@@ -31,26 +31,31 @@ def teachers(request):
 
 def redaction(request):
     if request.user.role == 'T':
-        user_class = request.user.classes_id.all()
-        classes = Classes.objects.filter(pk__in=user_class.values_list('id', flat=True))
-        class_name = request.GET.get('class_name') or None
-        if class_name != None:
-            if (int(class_name[0]), class_name[1:]) in user_class.values_list('number', 'letter'):
-                sub_access = Classes.objects.all()
-                print(sub_access)
-                subjects = Subjects.objects.filter(pk__in=request.user.subjects_id.all().values_list('id', flat=True) )
-                class_name = Classes.objects.filter(number=int(class_name[0]), letter=class_name[1:])
-            else:
-                return HttpResponseForbidden()
+        subjects = request.user.subjects_id.all()
+        sub_name = request.GET.get('sub_name') or None
+        if sub_name != None:
+            lessons = subjects.get(name=sub_name).lesson_id.all()
+            pass
+        # if  sub_name != None:
+            # if (int(sub_name[-2]), sub_name[-1]):
+            #     subjects = Subjects.objects.filter(pk__in=request.user.subjects_id.all().values_list('id', flat=True) )
+            #     sub_name = Classes.objects.filter(number=int(sub_name[0]), letter=sub_name[1:])
+            # else:
+            #     return HttpResponseForbidden()
+            
+            
+        #     print(b.split(' ')[1][-1])
+        # print(b.split(' ')[1][0:-1])
+
             # прописать доступы к классам. И развертовани с поиском предметов.
             # Дальше админом пользуемся (создание через excel предметов, уроков и классов, учителей и учиников)
             # Добавление учителей с привзякой прдметов и классво на сайте 
             # (я предмсвтлю выборку именно прдеметов, и понима автоматическое распредедение по классам)
             # как только сделаем прлое можео думать о редактирвани дз ит..д
         context = {
-            'classes': classes,
-            'subjects': None if class_name == None else subjects,
-            'active_class': None if class_name == None else class_name[0],
+            'lessons': None if sub_name==None else lessons,
+            'subjects': subjects,
+            'active_sub': sub_name,
             }
         return render(request, "teacher/redaction.html", context=context)
     else:

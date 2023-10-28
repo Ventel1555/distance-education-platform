@@ -1,61 +1,61 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
     <div class="container-fluid">
       <div width="16" height="16" class="special-div"></div>
-      <a class="navbar-brand text-bg-dark" href="{% url 'home' %}">Distance-Education-Platform</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Distance-Education-Platform</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse text-bg-dark" id="navbarTogglerDemo02">
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           {% if user.role == 'T' %}
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="{% url 'for_teachers' %}">Для учителя</a>
+            <a class="nav-link" href="{% url 'for_teachers' %}">Для учителя</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Изменить программу</a>
+            <a class="nav-link" href="#">Изменить программу</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="{% url 'redaction_teachers' %}">Редактор</a>
+            <a class="nav-link" href="{% url 'redaction_teachers' %}">Редактор</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Проверка заданий</a>
+            <a class="nav-link" href="#">Проверка заданий</a>
           </li>
 
           {% elif user.role == 'S' %}
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="{% url 'for_students' %}">Для ученика</a>
+            <a class="nav-link" href="{% url 'for_students' %}">Для ученика</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Список заданий</a>
+            <a class="nav-link" href="#">Список заданий</a>
           </li>
 
           {% elif user.role == 'A' %}
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="{% url 'for_admin' %}">Для администрации</a>
+            <a class="nav-link" href="{% url 'for_admin' %}">Для администрации</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Перевод учеников</a>
+            <a class="nav-link" href="#">Перевод учеников</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Редактор программы</a>
+            <a class="nav-link" href="#">Редактор программы</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Управление учителями</a>
+            <a class="nav-link" href="#">Управление учителями</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="#">Добавить ученика / учителя</a>
+            <a class="nav-link" href="#">Добавить ученика / учителя</a>
           </li>
           {% endif %}
           
           <li class="nav-item">
-            <a class="nav-link text-bg-dark" href="{% url 'help_page' %}">Помощь</a>
+            <a class="nav-link" href="{% url 'help_page' %}">Помощь</a>
           </li>
 
           {% if user.is_authenticated %}
             {% if user.feedback != 0 %}
             <li class="nav-item">
-              <a class="nav-link text-bg-dark" href="#">Обратная связь</a>
+              <a class="nav-link" href="#">Обратная связь</a>
             </li>
             {% endif %}
           {% endif %}
