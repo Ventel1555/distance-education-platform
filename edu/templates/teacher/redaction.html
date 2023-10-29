@@ -4,7 +4,7 @@
     <h1>Редактирование записей</h1>
 
     <div class="row grid">
-        <div class="col-4">
+        <div class="col-3">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">Предметы</h3>
@@ -27,17 +27,39 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">Уроки</h3>
-                    <ul class="list-group">
-                        {% for lesson in lessons %}
-                        <li class="list-group-item">{{lesson}}</li>
-                        {% empty %}
-                        <h5 class="text-center">Выберете предмет</h5>
-                        {% endfor %}
-                      </ul>
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <caption>Нажмите на предмет, чтобы посмотреть его содержание</caption>
+                        <thead>
+                            <tr>
+                              <th scope="col">Дата</th>
+                              <th scope="col">Тема урока</th>
+                              <th scope="col">Домашнее задание</th>
+                              <th scope="col">Статус урока</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-group-divider">
+                            {% for lesson in lessons%}
+                            <tr>
+                              <th scope="row">{{lesson.data}}</th>
+                              <td>{{lesson.topic}}</td>
+                              <td>{{lesson.home_work}}</td>
+                              {% if lesson.is_done %}
+                              <td>Урок проведен</td>
+                              {% else %}
+                              <td>Урок не проведен</td>
+                              {% endif %}
+                            </tr>
+                            {% empty %}
+                            <h5 class="text-center">Выберете предмет</h5>
+                            {% endfor %}
+                          </tbody>                        
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
