@@ -11,6 +11,7 @@ class Lessons(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
+        ordering = ["-is_done", "-data"]
         
     def __str__(self):
         """

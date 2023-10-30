@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -136,3 +136,4 @@ AUTH_USER_MODEL = "users.User"
 INTERNAL_IPS = [    
     "127.0.0.1",
 ]
+

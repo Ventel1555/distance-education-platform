@@ -3,11 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
-
-from edu.models import Classes, Subjects
-
 # в дальнейшем использовать LoginRequiredMixin
-
 # urls for main_html dir
 def home(request):
     return render(request, "main_html/add_base.html")
@@ -42,8 +38,6 @@ def redaction(request):
             #     sub_name = Classes.objects.filter(number=int(sub_name[0]), letter=sub_name[1:])
             # else:
             #     return HttpResponseForbidden()
-            
-            
         #     print(b.split(' ')[1][-1])
         # print(b.split(' ')[1][0:-1])
 

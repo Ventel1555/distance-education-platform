@@ -45,13 +45,13 @@
                           <tbody class="table-group-divider">
                             {% for lesson in lessons%}
                             <tr>
-                              <th scope="row">{{lesson.data}}</th>
-                              <td>{{lesson.topic}}</td>
-                              <td>{{lesson.home_work}}</td>
+                              <th >{{lesson.data|date:'d M Y'}}</th>
+                              <td>{{lesson.topic|truncatewords:4}}</td>
+                              <td>{{lesson.home_work|truncatewords:4}}</td>
                               {% if lesson.is_done %}
                               <td>Урок проведен</td>
                               {% else %}
-                              <td>Урок не проведен</td>
+                              <td class="table-danger">Урок не проведен</td>
                               {% endif %}
                             </tr>
                             {% empty %}
