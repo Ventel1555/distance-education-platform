@@ -63,7 +63,10 @@
         </ul>
         <div class="navbar-nav">
           {% if user.is_authenticated %}
-          <a class="nav-link" aria-current="page" style="margin-right: 5px;">{{ user.first_name}} {{user.last_name}} - {{user.get_role_display}}</a>
+          <a class="nav-link" aria-current="page" style="margin-right: 5px;">
+            <i class="fa-solid fa-user"></i>
+            {{ user.first_name}} {{user.last_name}} - {{user.get_role_display}}
+          </a>
           <div class="d-flex">
               <a class="btn btn-outline-secondary" href="{% url 'logout_view'%}">Выйти</a>
           </div>

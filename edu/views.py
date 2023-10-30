@@ -1,8 +1,10 @@
+from typing import Any
 from django.shortcuts import render
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
+from .models import Lessons
 # в дальнейшем использовать LoginRequiredMixin
 # urls for main_html dir
 def home(request):
@@ -10,6 +12,10 @@ def home(request):
 
 def help_page(request):
     return render(request, "main_html/help_page.html")
+
+class DetailLessonView(DetailView):
+    model = Lessons
+    
 
 # Student
 def students(request):

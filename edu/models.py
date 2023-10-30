@@ -5,8 +5,9 @@ from django.db import models
 class Lessons(models.Model):
     data = models.DateField(verbose_name='Дата')
     is_done = models.BooleanField(verbose_name='Урок проведен')
-    topic = models.CharField(max_length=40, verbose_name='Тема урока')
-    home_work = models.CharField(max_length=40, verbose_name='Домашняя работа')
+    topic = models.TextField(verbose_name='Тема урока')
+    additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True)
+    home_work = models.TextField(verbose_name='Домашняя работа')
     
     class Meta:
         verbose_name = 'Урок'
