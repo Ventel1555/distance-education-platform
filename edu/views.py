@@ -1,11 +1,8 @@
-from typing import Any
-from django.db import models
 from django.shortcuts import render
-from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
-from .models import Lessons, Classes
+from django.http import HttpResponseForbidden
+from .models import Lessons
 # в дальнейшем использовать LoginRequiredMixin
 # urls for main_html dir
 def home(request):
@@ -24,7 +21,7 @@ def students(request):
     else:
         return HttpResponseForbidden()
 
-def list_homework_view(request, login):
+def list_homework_view(request):
     if request.user.role != 'T':
         subjects = request.user.classes_id.sub_id.all()
         sub_name = request.GET.get('sub_name') or None
@@ -62,11 +59,6 @@ def redaction(request):
         #     print(b.split(' ')[1][-1])
         # print(b.split(' ')[1][0:-1])
 
-            # прописать доступы к классам. И развертовани с поиском предметов.
-            # Дальше админом пользуемся (создание через excel предметов, уроков и классов, учителей и учиников)
-            # Добавление учителей с привзякой прдметов и классво на сайте 
-            # (я предмсвтлю выборку именно прдеметов, и понима автоматическое распредедение по классам)
-            # как только сделаем прлое можео думать о редактирвани дз ит..д
         context = {
             'lessons': None if sub_name==None else lessons,
             'subjects': subjects,
