@@ -1,10 +1,11 @@
 from typing import Any
+from django.db import models
 from django.shortcuts import render
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden
-from .models import Lessons
+from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
+from .models import Lessons, Classes
 # в дальнейшем использовать LoginRequiredMixin
 # urls for main_html dir
 def home(request):
@@ -13,10 +14,9 @@ def home(request):
 def help_page(request):
     return render(request, "main_html/help_page.html")
 
-class DetailLessonView(DetailView):
+class DetailLessonView(LoginRequiredMixin, DetailView):
     model = Lessons
     
-
 # Student
 def students(request):
     if request.user.role == 'S':
@@ -24,6 +24,21 @@ def students(request):
     else:
         return HttpResponseForbidden()
 
+def list_homework_view(request, login):
+    if request.user.role != 'T':
+        subjects = request.user.classes_id.sub_id.all()
+        sub_name = request.GET.get('sub_name') or None
+        if sub_name != None:
+            lessons = subjects.get(name=sub_name).lesson_id.filter(is_done =True)
+            pass
+        context = {
+            'lessons': None if sub_name==None else lessons,
+            'subjects': subjects,
+            'active_sub': sub_name,
+            }
+        return render(request, "student/list_homework.html", context=context)
+    else:
+        return HttpResponseForbidden()
 # Teacher
 def teachers(request):
     if request.user.role == 'T':
