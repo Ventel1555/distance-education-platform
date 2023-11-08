@@ -27,7 +27,7 @@
             <a class="nav-link" href="{% url 'for_students' %}">Для ученика</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'homework-list' user.login %}">Список заданий</a>
+            <a class="nav-link" href="{% url 'homework-list' %}">Список заданий</a>
           </li>
 
           {% elif user.role == 'A' %}
