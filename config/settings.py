@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'edu',
     'users',
     "debug_toolbar",
+    'edu_admin_tools',
+    'import_export',
 ]
 
 MIDDLEWARE = [
