@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="excel_file">
+    <button type="submit">Загрузить</button>
+</form>
 {% endblock content %}
