@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
     <div class="container-fluid">
       <div width="16" height="16" class="special-div"></div>
-      <a class="navbar-brand" href="{% url 'home' %}">Distance-Education-Platform</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Education-Platform</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -9,39 +9,36 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           {% if user.role == 'T' %}
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'for_teachers' %}">Для учителя</a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="#">Изменить программу</a>
+            <a class="nav-link" href="{% url 'edu_program' %}">Изменить программу</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'redaction_teachers' %}">Редактор</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Проверка заданий</a>
-          </li>
 
           {% elif user.role == 'S' %}
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'for_students' %}">Для ученика</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'homework-list' %}">Список заданий</a>
           </li>
 
           {% elif user.role == 'A' %}
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'for_admin' %}">Для администрации</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="#">Перевод учеников</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Редактор программы</a>
+            <a class="nav-link" href="{% url 'edu_program' %}">Изменение программы</a>                       
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Управление учителями</a>
+            <a class="nav-link" href="#">Учителя</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'add_schoolers' %}">Добавить пользователя</a>
@@ -51,14 +48,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'help_page' %}">Помощь</a>
           </li>
-
-          {% if user.is_authenticated %}
-            {% if user.feedback != 0 %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">Обратная связь</a>
-            </li>
-            {% endif %}
-          {% endif %}
 
         </ul>
         <div class="navbar-nav">

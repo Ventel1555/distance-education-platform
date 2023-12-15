@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('edu.urls')),
     path('users/',include('users.urls')),
-    path('admin-tools/',include('edu_admin_tools.urls')),
+    path('edu-tools/',include('edu_tools.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
 if settings.DEBUG:

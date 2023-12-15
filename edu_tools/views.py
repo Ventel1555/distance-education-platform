@@ -20,5 +20,8 @@ def add_schoolers(request):
                 User.objects.create_user(login=username, password=password, first_name=name, last_name=surname, patronymic=patronymic)
         
         return redirect('home')
-    
+        
     return render(request, "tools/add_schoolers.html")  
+
+def edu_program(request):
+    return render(request, "tools/edu_program.html")  
