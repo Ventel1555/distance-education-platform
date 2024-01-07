@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap.css">
+    <link rel="image" type="image/psd" href="{% static 'images/Sorting icons.psd' %}">
+</head>
 <body>
   <div class="container">
     <h1>Перевод учеников</h1>
@@ -52,10 +57,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap.js"></script>
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
   <script type="text/javascript">
       $(document).ready( function () {
           $('#myTable').DataTable();
+          $("label select").addClass("form-select");
+          $("label input").addClass("form-control");
       } );
   </script>
 </body>
