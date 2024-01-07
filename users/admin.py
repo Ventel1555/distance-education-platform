@@ -4,4 +4,5 @@ from .models import User
 
 @admin.register(User)
 class CustomUserAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('login', 'first_name', 'last_name', 'patronymic', 'role', 'classes_id', 'is_active')
+    list_filter = ('role', 'classes_id', 'is_active')

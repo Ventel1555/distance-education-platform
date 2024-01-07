@@ -19,7 +19,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('Имя'), max_length=30)
     last_name = models.CharField(_('Фамилия'), max_length=30)
     patronymic = models.CharField(_('Отчество'), max_length=30, blank=True)
-    classes_id = models.ForeignKey(Classes, related_name=_('Класс'), on_delete=models.CASCADE, blank=True, null=True)
+    classes_id = models.ForeignKey(Classes, related_name=_('Класс'),
+                                   on_delete=models.CASCADE, verbose_name=_('Доступы к классу'),
+                                   blank=True, null=True)
     subjects_id = models.ManyToManyField(Subjects, verbose_name=_('Доступы к предметам'), blank=True)
     is_active = models.BooleanField(_('Активный'), default=True)
     role = models.CharField(_('Роль'), max_length=8, choices=CHOICES_ROLE, blank=True)

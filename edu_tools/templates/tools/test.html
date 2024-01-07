@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+</head>
+<body>
+
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John</td>
+            <td>28</td>
+            <td>$3000</td>
+        </tr>
+        <tr>
+            <td>Anna</td>
+            <td>35</td>
+            <td>$3500</td>
+        </tr>
+        <tr>
+            <td>Peter</td>
+            <td>25</td>
+            <td>$2500</td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+
+</body>
+</html>
