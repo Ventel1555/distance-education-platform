@@ -3,8 +3,8 @@
 {% block content %}
 {% load static %}
 <head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap.css">
-    <link rel="image" type="image/psd" href="{% static 'images/Sorting icons.psd' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
   <div class="container">
@@ -15,7 +15,7 @@
         <table id="myTable" class="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th><input type="checkbox" id="action-toggle" onclick="toggleCheckboxes(this)"></th>
                     <th>Имя</th>
                     <th>Фамилия</th>
                     <th>Отчество</th>
@@ -53,18 +53,35 @@
     </form>
 </div>
   <!-- Include Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap.js"></script>
-  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   <script type="text/javascript">
+    
       $(document).ready( function () {
           $('#myTable').DataTable();
-          $("label select").addClass("form-select");
-          $("label input").addClass("form-control");
       } );
+      new DataTable('#myTable', {
+        language: {
+    
+            infoEmpty: 'Нет актуальной информации',
+            infoFiltered: '(Отсортировано от _MAX_ всех записей)',
+            lengthMenu: 'Отображается _MENU_ учеников на страницу',
+            zeroRecords: 'Ничего не найдено - простите',
+            search: 'Поиск по таблице:',
+        }
+});
   </script>
+  <script>
+    function toggleCheckboxes(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:not(.hidden)');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    }
+</script>
 </body>
 {% endblock content %}
