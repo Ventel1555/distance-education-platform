@@ -29,7 +29,7 @@
                     <td>{{ student.first_name }}</td>
                     <td>{{ student.last_name }}</td>
                     <td>{{ student.patronymic }}</td>
-                    <td>{{ student.classes_id }}</td>
+                    <td>{{ student.classes_id|default:"Нет" }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

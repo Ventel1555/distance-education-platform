@@ -38,9 +38,6 @@
             <a class="nav-link" href="{% url 'edu_program' %}">Изменение программы</a>                       
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Админ панель</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'add_schoolers' %}">Добавить пользователя</a>
           </li>
           {% endif %}
@@ -51,11 +48,16 @@
 
         </ul>
         <div class="navbar-nav">
+          
           {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+          <a class="nav-link" href="{% url 'admin:index' %}">Админ панель</a>
+          {% endif %}
           <a class="nav-link" aria-current="page" style="margin-right: 5px;">
             <i class="fa-solid fa-user"></i>
             {{ user.first_name}} {{user.last_name}} - {{user.get_role_display}}
           </a>
+          
           <div class="d-flex">
               <a class="btn btn-outline-secondary" href="{% url 'logout_view'%}">Выйти</a>
           </div>

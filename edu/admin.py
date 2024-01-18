@@ -12,4 +12,5 @@ class Subjectsdmin(admin.ModelAdmin):
 
 @admin.register(Lessons)
 class LessonsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('topic', 'email', 'data', 'is_done')
+    list_filter = ('data', 'is_done', 'email')

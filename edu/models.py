@@ -8,6 +8,7 @@ class Lessons(models.Model):
     topic = models.TextField(verbose_name='Тема урока')
     additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True)
     home_work = models.TextField(verbose_name='Домашняя работа')
+    email = models.EmailField(blank=True, verbose_name='Автор')
     
     class Meta:
         verbose_name = 'Урок'
@@ -19,6 +20,10 @@ class Lessons(models.Model):
         String for representing the MyModelName object (in Admin site etc.)
         """
         return self.topic
+    
+    # def save(self, *args, **kwargs):
+    #     self.email = self.request.user.email
+    #     super(Lessons, self).save(*args, **kwargs)
 
 
 class Subjects(models.Model):

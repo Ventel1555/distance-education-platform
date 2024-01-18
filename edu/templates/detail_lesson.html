@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h4>Урок <em>{{lessons.topic}}</em></h4>
+<div class="container"><hr>
+    <h4>Урок</h4>
+    <h4><em>{{lessons.topic}}</em></h4>
     <small>{{lessons.data}}</small>
-    <p>Тут должна юбыь красивая табличка карта о этом уроки.</p>
+    <h5>Тема урока</h5>
+    <p>{{lessons.additionals}}</p>
     <hr>
-    {{lessons.additionals}}
-    <hr>
-    {{lessons.home_work}}
-    <h1>ТЕГ ДОБАВЬ - Присылайте дз на почту - {{user.email}} ПОЧТУ ССЫЛКА ЧТОБ ОТОБРАЖАЛОСЬ КАК EMAIL</h1>
+    <h5>Домашнее задание</h5>
+    <p>{{lessons.home_work}}</p>
+    <h1>ТЕГ ДОБАВЬ - Присылайте дз на почту - {{lessons.email}} ПОЧТУ ССЫЛКА ЧТОБ ОТОБРАЖАЛОСЬ КАК EMAIL</h1>
 
     <h2>
         У УЧИТЕЛЕЙ ДОЛЖНА ЫТЬ ФОРМА ДЛЯ ИЗМЕНЕНИЯ УРОКА
     </h2>
+</div>
 {% endblock content %}

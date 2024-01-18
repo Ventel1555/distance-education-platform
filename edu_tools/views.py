@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-# from django.contrib.auth.mixins import LoginRequiredMixin
 import pandas as pd
 from edu.models import Classes
 from users.models import User
+from .forms import LessonsForm
+
 
 def add_schoolers(request):
     if request.method == 'POST':
@@ -25,8 +26,14 @@ def add_schoolers(request):
         
     return render(request, "tools/add_schoolers.html")  
 
+
 def edu_program(request):
-    return render(request, "tools/edu_program.html")  
+    if request.method == 'POST':
+        form = LessonsForm(request.POST)
+        return redirect('homework-list')
+    else:
+        form = LessonsForm()
+    return render(request, 'tools/edu_program.html', {'form': form})
 
 
 def class_change(request):
