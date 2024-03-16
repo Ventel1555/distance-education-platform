@@ -2,18 +2,21 @@
 
 {% block content %}
 <div class="container"><hr>
-    <h4>Урок</h4>
-    <h4><em>{{lessons.topic}}</em></h4>
+    <h4>Урок<em>{{lessons.topic}}</em></h4>
     <small>{{lessons.data}}</small>
-    <h5>Тема урока</h5>
+    {% if lessons.additionals %}
+    <h5>Дополнительные материалы</h5>
     <p>{{lessons.additionals}}</p>
+    {% endif %}
     <hr>
     <h5>Домашнее задание</h5>
     <p>{{lessons.home_work}}</p>
-    <h1>ТЕГ ДОБАВЬ - Присылайте дз на почту - {{lessons.email}} ПОЧТУ ССЫЛКА ЧТОБ ОТОБРАЖАЛОСЬ КАК EMAIL</h1>
-
-    <h2>
-        У УЧИТЕЛЕЙ ДОЛЖНА ЫТЬ ФОРМА ДЛЯ ИЗМЕНЕНИЯ УРОКА
-    </h2>
+    {% if lessons.email%}
+        <br>
+        <h5>Присылайте дз на почту - 
+        <a href="mailto:{{lessons.email}}">{{lessons.email}}</a></h5>
+    {% endif %}
+    {% if user.role == 'T'%}
+    {% endif %}
 </div>
 {% endblock content %}

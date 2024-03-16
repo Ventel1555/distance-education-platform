@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
 import pandas as pd
-from edu.models import Classes
+from edu.models import Classes, Lessons, Subjects
 from users.models import User
 from .forms import LessonsForm
+from django.contrib import messages
 
 
 def add_schoolers(request):
@@ -26,13 +27,29 @@ def add_schoolers(request):
         
     return render(request, "tools/add_schoolers.html")  
 
-
+# Добавление уроков
 def edu_program(request):
     if request.method == 'POST':
-        form = LessonsForm(request.POST)
-        return redirect('homework-list')
+        form = LessonsForm(request.POST, user = request.user)
+        if form.is_valid():
+
+            lesson = Lessons.objects.create(
+                topic = request.POST.get('topic'),
+                additionals = request.POST.get('additionals'),
+                home_work = request.POST.get('home_work'),
+                data = request.POST.get('data'),
+                email = request.POST.get('email')
+            )
+            
+            subject = Subjects.objects.get(id=request.POST.get('class_field'))
+            print(subject, lesson)
+            subject.lesson_id.add(lesson)
+            subject.save()
+            messages.success(request, 'Запись успешно создана')
+        
+        return redirect('redaction_teachers')
     else:
-        form = LessonsForm()
+        form = LessonsForm(user = request.user)
     return render(request, 'tools/edu_program.html', {'form': form})
 
 

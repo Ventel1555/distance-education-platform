@@ -4,7 +4,6 @@ from django.db import models
 
 class Lessons(models.Model):
     data = models.DateField(verbose_name='Дата')
-    is_done = models.BooleanField(verbose_name='Урок проведен')
     topic = models.TextField(verbose_name='Тема урока')
     additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True)
     home_work = models.TextField(verbose_name='Домашняя работа')
@@ -13,7 +12,7 @@ class Lessons(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
-        ordering = ["-is_done", "-data"]
+        ordering = ["-data"]
         
     def __str__(self):
         """

@@ -8,9 +8,6 @@ from .models import Lessons
 def home(request):
     return render(request, "main_html/add_base.html")
 
-def help_page(request):
-    return render(request, "main_html/help_page.html")
-
 class DetailLessonView(LoginRequiredMixin, DetailView):
     model = Lessons
     
@@ -26,7 +23,7 @@ def list_homework_view(request):
         subjects = request.user.classes_id.sub_id.all()
         sub_name = request.GET.get('sub_name') or None
         if sub_name != None:
-            lessons = subjects.get(name=sub_name).lesson_id.filter(is_done =True)
+            lessons = subjects.get(name=sub_name).lesson_id.all()
             pass
         context = {
             'lessons': None if sub_name==None else lessons,
@@ -44,7 +41,7 @@ def teachers(request):
         return HttpResponseForbidden()
 
 def redaction(request):
-    if request.user.role == 'T':
+    if request.user.role == 'T' or request.user.role == 'A':
         subjects = request.user.subjects_id.all()
         sub_name = request.GET.get('sub_name') or None
         if sub_name != None:

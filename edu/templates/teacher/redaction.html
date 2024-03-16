@@ -38,7 +38,6 @@
                               <th scope="col">Дата</th>
                               <th scope="col">Тема урока</th>
                               <th scope="col">Домашнее задание</th>
-                              <th scope="col">Статус урока</th>
                             </tr>
                           </thead>
                           <tbody class="table-group-divider">
@@ -47,11 +46,6 @@
                               <th scope="row">{{lesson.data}}</th>
                               <td><a href="{% url 'detail_lesson' lesson.id %}">{{lesson.topic}}</a></td>
                               <td>{{lesson.home_work}}</td>
-                              {% if lesson.is_done %}
-                              <td>Урок проведен</td>
-                              {% else %}
-                              <td class="table-danger">Урок не проведен</td>
-                              {% endif %}
                             </tr>
                             {% empty %}
                             <h5 class="text-center">Выберете предмет</h5>

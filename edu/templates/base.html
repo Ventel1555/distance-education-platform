@@ -17,6 +17,14 @@
     <!--Navbar-->
     {% include 'navbar1.html' %}
     <div class="container-fluid" style="width: 90%;">
+      {% if messages %}
+        {% for message in messages %}
+        <br>
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
     {% block content %}
     {% endblock %}
     </div>
