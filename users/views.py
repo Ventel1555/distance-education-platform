@@ -1,8 +1,13 @@
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth import logout
 from users.forms import AuthenticationForm
+from django.shortcuts import redirect
 
+def logout_view(request):
+    logout(request)
+    return redirect('login_view') # на главную страницу сайта
 
 class MyLoginView(LoginView):
     redirect_authenticated_user = True
