@@ -1,27 +1,37 @@
-{%extends 'base.html'%}
+{%extends 'base.html'%} {%block content%}
+<div></div>
+<div class="center mx-auto p-2" style="margin-top: 20px; width: 350px">
+  {% for message in messages %}
+  <div
+    class="message text-center alert alert-primary"
+    style="margin-top: 5px; margin-bottom: 5px"
+  >
+    {{ message }}
+  </div>
+  {% endfor %}
+  <form method="post" class="card" novalidate>
+    {% csrf_token %}
+    <h2 class="text-center" style="margin-top: 8px">Вход в аккаунт</h2>
+    {% for field in form %}
+    <div class="mb-2">
+      <div class="vstack gap-2 col-md-9 mx-auto">
+        {{ field.label_tag }} {{ field }}
+      </div>
+    </div>
+    {% endfor %}
 
-{%block content%}
-	<div ></div>
-  <div class="center mx-auto p-2" style="margin-top: 20px; width: 350px">
-		{% for message in messages %}
-			<div class="message text-center alert alert-primary" style="margin-top: 5px; margin-bottom: 5px">
-				{{ message }}
-			</div>
-		{% endfor %}
-	  <form method="post" class="card" novalidate>
-	  	{% csrf_token %}
-	    <h2 class="text-center" style="margin-top: 8px;">Вход в аккаунт</h2>
-		{% for field in form %}
-			<div class="mb-2">
-				<div class="vstack gap-2 col-md-9 mx-auto"> {{ field.label_tag }} {{ field }}</div>
-			</div>	    		
-		{% endfor %}
-		
-		<input type="submit" value="Войти" class="btn btn-primary d-grid col-6 mx-auto" style="margin-top: 10px;">
-		<hr>
-		<p class="text-center">Если возникли неполадки, например, не работает выданный пароль - <a href="#">Пишите сюда</a></p>
-	</form>
-
+    <input
+      type="submit"
+      value="Войти"
+      class="btn btn-primary d-grid col-6 mx-auto"
+      style="margin-top: 10px"
+    />
+    <hr />
+    <p class="text-center">
+      Если возникли неполадки, например, не работает выданный пароль -
+      <a href="#">Пишите сюда</a>
+    </p>
+  </form>
 </div>
 
 {%endblock content%}

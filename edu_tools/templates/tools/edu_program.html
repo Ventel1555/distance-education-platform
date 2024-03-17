@@ -1,14 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<!-- url 'add_lesson'  -->
+<div class="container">
+  <h1>Изменение программы</h1>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </form>
+</div>
 
-{% block content %}
-     <!-- url 'add_lesson'  -->
-    <div class="container">
-        <h1>Изменение программы</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Создать</button>
-        </form>
-    </div>
-    
 {% endblock content %}

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container"><hr>
+<div class="container">
+    <hr>
     <h4>Урок<em>{{lessons.topic}}</em></h4>
     <small>{{lessons.data}}</small>
     {% if lessons.additionals %}
@@ -12,9 +13,10 @@
     <h5>Домашнее задание</h5>
     <p>{{lessons.home_work}}</p>
     {% if lessons.email%}
-        <br>
-        <h5>Присылайте дз на почту - 
-        <a href="mailto:{{lessons.email}}">{{lessons.email}}</a></h5>
+    <br>
+    <h5>Присылайте дз на почту -
+        <a href="mailto:{{lessons.email}}">{{lessons.email}}</a>
+    </h5>
     {% endif %}
     {% if user.role == 'T'%}
     {% endif %}

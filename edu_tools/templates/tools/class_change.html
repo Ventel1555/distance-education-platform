@@ -1,87 +1,102 @@
-{% extends 'base.html' %}
-
-{% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 <head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+  />
 </head>
 <body>
   <div class="container">
     <h1>Перевод учеников</h1>
     <form action="" method="post">
-        {% csrf_token %}
-        
-        <table id="myTable" class="table">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="action-toggle" onclick="toggleCheckboxes(this)"></th>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Отчество</th>
-                    <th>Класс</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                <tr>
-                    <td><input type="checkbox" name="selected_students" value="{{ student.id }}"></td>
-                    <td>{{ student.first_name }}</td>
-                    <td>{{ student.last_name }}</td>
-                    <td>{{ student.patronymic }}</td>
-                    <td>{{ student.classes_id|default:"Нет" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h4>Перевести всех учеников в:</h4>
-        <div class="form-group">
-          <select class="form-control" name="class_filter">
-              {% for class in classes %}
-              <option value="{{class.id}}">{{class}}</option>
-              {% endfor %}
-          </select>
+      {% csrf_token %}
+
+      <table id="myTable" class="table">
+        <thead>
+          <tr>
+            <th>
+              <input
+                type="checkbox"
+                id="action-toggle"
+                onclick="toggleCheckboxes(this)"
+              />
+            </th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Класс</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>
+              <input
+                type="checkbox"
+                name="selected_students"
+                value="{{ student.id }}"
+              />
+            </td>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+            <td>{{ student.patronymic }}</td>
+            <td>{{ student.classes_id|default:"Нет" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h4>Перевести всех учеников в:</h4>
+      <div class="form-group">
+        <select class="form-control" name="class_filter">
+          {% for class in classes %}
+          <option value="{{class.id}}">{{class}}</option>
+          {% endfor %}
+        </select>
       </div>
-      <br>
-        <!-- <div class="form-group">
+      <br />
+      <!-- <div class="form-group">
             <select class="form-control" name="action">
                 <option value="assign_class">Assign to Class</option>
                 <option value="transfer_class">Transfer to Class</option>
             </select>
         </div> -->
-        <button type="submit" class="btn btn-primary">Применить изменения</button>
+      <button type="submit" class="btn btn-primary">Применить изменения</button>
     </form>
-</div>
+  </div>
   <!-- Include Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   <script type="text/javascript">
-    
-      $(document).ready( function () {
-          $('#myTable').DataTable();
-      } );
-      new DataTable('#myTable', {
-        language: {
-    
-            infoEmpty: 'Нет актуальной информации',
-            infoFiltered: '(Отсортировано от _MAX_ всех записей)',
-            lengthMenu: 'Отображается _MENU_ учеников на страницу',
-            zeroRecords: 'Ничего не найдено - простите',
-            search: 'Поиск по таблице:',
-        }
-});
+    $(document).ready(function () {
+      $("#myTable").DataTable();
+    });
+    new DataTable("#myTable", {
+      language: {
+        infoEmpty: "Нет актуальной информации",
+        infoFiltered: "(Отсортировано от _MAX_ всех записей)",
+        lengthMenu: "Отображается _MENU_ учеников на страницу",
+        zeroRecords: "Ничего не найдено - простите",
+        search: "Поиск по таблице:",
+      },
+    });
   </script>
   <script>
     function toggleCheckboxes(source) {
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]:not(.hidden)');
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i] != source) {
-                checkboxes[i].checked = source.checked;
-            }
+      var checkboxes = document.querySelectorAll(
+        'input[type="checkbox"]:not(.hidden)'
+      );
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i] != source) {
+          checkboxes[i].checked = source.checked;
         }
+      }
     }
-</script>
+  </script>
 </body>
 {% endblock content %}

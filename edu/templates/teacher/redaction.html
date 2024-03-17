@@ -1,61 +1,76 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<h1>Редактирование записей</h1>
 
-{% block content %}
-    <h1>Редактирование записей</h1>
-    
-    <div class="row grid">
-        <div class="col-2">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-center">Предметы</h5>
-                    <ul class="list-group">
-                        {% for subj in subjects%}
-                        {% if subj.name == active_sub %}
-                        <form method="get" class="list-group">
-                            <button type="submit" class="btn btn-primary btn-sm" name="sub_name" value="{{subj}}">{{subj}}</button>
-                        </form>
-                        {% else %}
-                        <form method="get" class="list-group">
-                            <button type="submit" class="btn btn-secondary btn-sm" name="sub_name" value="{{subj}}">{{subj}}</button>
-                        </form>
-                        {% endif %}
-                        <hr>
-                        {% empty %}
-                        <h6 class="text-center">Вам пока не доступен ни один предмет</h6>
-                        {% endfor %}
-                      </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-10">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-center">Уроки</h5>
-                    <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                              <th scope="col">Дата</th>
-                              <th scope="col">Тема урока</th>
-                              <th scope="col">Домашнее задание</th>
-                            </tr>
-                          </thead>
-                          <tbody class="table-group-divider">
-                            {% for lesson in lessons%}
-                            <tr>
-                              <th scope="row">{{lesson.data}}</th>
-                              <td><a href="{% url 'detail_lesson' lesson.id %}">{{lesson.topic}}</a></td>
-                              <td>{{lesson.home_work}}</td>
-                            </tr>
-                            {% empty %}
-                            <h5 class="text-center">Выберете предмет</h5>
-                            {% endfor %}
-                          </tbody>                        
-                    </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row grid">
+  <div class="col-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-center">Предметы</h5>
+        <ul class="list-group">
+          {% for subj in subjects%} {% if subj.name == active_sub %}
+          <form method="get" class="list-group">
+            <button
+              type="submit"
+              class="btn btn-primary btn-sm"
+              name="sub_name"
+              value="{{subj}}"
+            >
+              {{subj}}
+            </button>
+          </form>
+          {% else %}
+          <form method="get" class="list-group">
+            <button
+              type="submit"
+              class="btn btn-secondary btn-sm"
+              name="sub_name"
+              value="{{subj}}"
+            >
+              {{subj}}
+            </button>
+          </form>
+          {% endif %}
+          <hr />
+          {% empty %}
+          <h6 class="text-center">Вам пока не доступен ни один предмет</h6>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
+  </div>
+  <div class="col-10">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="text-center">Уроки</h5>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Дата</th>
+                <th scope="col">Тема урока</th>
+                <th scope="col">Домашнее задание</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for lesson in lessons%}
+              <tr>
+                <th scope="row">{{lesson.data}}</th>
+                <td>
+                  <a href="{% url 'detail_lesson' lesson.id %}"
+                    >{{lesson.topic}}</a
+                  >
+                </td>
+                <td>{{lesson.home_work}}</td>
+              </tr>
+              {% empty %}
+              <h5 class="text-center">Выберете предмет</h5>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
