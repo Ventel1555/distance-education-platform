@@ -16,9 +16,6 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if user.role == 'T' %}
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="{% url 'for_teachers' %}">Для учителя</a>
-          </li> -->
         <li class="nav-item">
           <a class="nav-link" href="{% url 'edu_program' %}"
             >Изменить программу</a
@@ -29,9 +26,6 @@
         </li>
 
         {% elif user.role == 'S' %}
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="{% url 'for_students' %}">Для ученика</a>
-          </li> -->
         <li class="nav-item">
           <a class="nav-link" href="{% url 'homework-list' %}"
             >Список заданий</a
@@ -39,9 +33,6 @@
         </li>
 
         {% elif user.role == 'A' %}
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="{% url 'for_admin' %}">Для администрации</a>
-          </li> -->
         <li class="nav-item">
           <a class="nav-link" href="{% url 'class_change' %}"
             >Перевод учеников</a

@@ -41,20 +41,12 @@ def teachers(request):
         return HttpResponseForbidden()
 
 def redaction(request):
-    if request.user.role == 'T' or request.user.role == 'A':
+    if request.user.role != "S":
         subjects = request.user.subjects_id.all()
         sub_name = request.GET.get('sub_name') or None
         if sub_name != None:
             lessons = subjects.get(name=sub_name).lesson_id.all()
             pass
-        # if  sub_name != None:
-            # if (int(sub_name[-2]), sub_name[-1]):
-            #     subjects = Subjects.objects.filter(pk__in=request.user.subjects_id.all().values_list('id', flat=True) )
-            #     sub_name = Classes.objects.filter(number=int(sub_name[0]), letter=sub_name[1:])
-            # else:
-            #     return HttpResponseForbidden()
-        #     print(b.split(' ')[1][-1])
-        # print(b.split(' ')[1][0:-1])
 
         context = {
             'lessons': None if sub_name==None else lessons,
