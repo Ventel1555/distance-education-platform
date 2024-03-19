@@ -41,7 +41,7 @@ class Subjects(models.Model):
     
     
 class Classes(models.Model):
-    number = models.CharField(max_length=1, verbose_name='Номер класса')
+    number = models.CharField(max_length=2, verbose_name='Номер класса')
     letter = models.CharField(max_length=1, verbose_name='Параллель')
     sub_id = models.ManyToManyField(Subjects, verbose_name='Предметы')
     
