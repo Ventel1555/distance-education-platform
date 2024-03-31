@@ -35,7 +35,7 @@ def add_schoolers(request):
 def edu_program(request):
     if request.user.role != 'S':
         if request.method == 'POST':
-            form = LessonsForm(request.POST, user = request.user)
+            form = LessonsForm(request.POST, request.FILES, user = request.user)
             if form.is_valid():
 
                 lesson = Lessons.objects.create(
@@ -43,7 +43,8 @@ def edu_program(request):
                     additionals = request.POST.get('additionals'),
                     home_work = request.POST.get('home_work'),
                     data = request.POST.get('data'),
-                    email = request.POST.get('email')
+                    email = request.POST.get('email'),
+                    document = request.FILES['document'],
                 )
                 
                 subject = Subjects.objects.get(id=request.POST.get('class_field'))

@@ -1,13 +1,21 @@
+import os
 from django.db import models
 
 # settings.AUTH_USER_MODEL      -   better practise
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    ext = filename.split('.')[-1]
+    filename = "%s_%s.%s" % (instance.topic, os.path.splitext(filename)[0], ext)
+    return os.path.join('files', filename)
+
 
 class Lessons(models.Model):
     data = models.DateField(verbose_name='Дата')
     topic = models.TextField(verbose_name='Тема урока')
-    additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True)
+    additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True, help_text='Это не обязательное поле')
     home_work = models.TextField(verbose_name='Домашняя работа')
-    email = models.EmailField(blank=True, verbose_name='Автор')
+    email = models.EmailField(blank=True, verbose_name='Почта учителя', help_text='Это не обязательное поле')
+    document = models.FileField(blank=False, null=True, upload_to=user_directory_path, verbose_name='Файлы урока', help_text='Это не обязательное поле')
     
     class Meta:
         verbose_name = 'Урок'

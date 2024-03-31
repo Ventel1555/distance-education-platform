@@ -13,15 +13,23 @@ def home(request):
 @login_required
 def lesson_detail(request, lesson_id):
     lesson = get_object_or_404(Lessons, pk=lesson_id)
+    if lesson.document:
+        initial_document = {'document': lesson.document}
+    else: 
+        initial_document = None
     form = None
-    if request.user.is_staff:
+    if request.user.role != 'S':
         if request.method == "POST":
-            form = LessonForm(request.POST, instance=lesson)
+            form = LessonForm(request.POST, request.FILES, instance=lesson)
             if form.is_valid():
                 form.save()
+                
+                if 'document' in request.FILES:
+                    lesson.document = request.FILES['document']
+                    lesson.save()
                 messages.success(request, 'Изменения сохранены')
         else:
-            form = LessonForm(instance=lesson)
+            form = LessonForm(instance=lesson, initial=initial_document)
     return render(request, 'detail_lesson.html', {'lesson': lesson, 'form': form})
     
 # Student

@@ -6,9 +6,10 @@
     <h2>Матерал урока</h2>
     <p><strong>Название урока:</strong> {{ lesson.topic }}</p>
     <p><strong>Дата урока:</strong> {{ lesson.data }}</p>
-    {% if lesson.additionals %}
+    {% if lesson.additionals or lesson.document%}
       <p><strong>Дополнительные материалы:</strong> 
         <br> {{ lesson.additionals }} 
+        <a href="{{ lesson.document.url }}">{{ lesson.document.name }}</a>
       </p>
     {% endif %}
     <p><strong>Домашнее задание:</strong> {{ lesson.home_work }}</p>
@@ -19,7 +20,7 @@
 {% else %}
 <div class="container">
     <h2>Изменение урока</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
           <label for="lessonDate">Дата урока:</label>
@@ -41,6 +42,13 @@
           <label for="authorEmail">Email автора:</label>
           <input type="email" class="form-control" id="authorEmail" name="email" value="{{ lesson.email }}">
         </div>
+        <div class="form-group">
+          <label for="document">Файлы урока:</label>
+          <input type="file" class="form-control" id="document" name="document">
+          {% if lesson.document %}
+              <a href="{{ lesson.document.url }}" target="_blank">Скачать существующий файл</a>
+          {% endif %}
+      </div>
         <br>
         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
       </form>
