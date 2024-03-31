@@ -1,24 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.role != 'T'%}
 <div class="container">
-    <hr>
-    <h4>Урок<em>{{lessons.topic}}</em></h4>
-    <small>{{lessons.data}}</small>
-    {% if lessons.additionals %}
-    <h5>Дополнительные материалы</h5>
-    <p>{{lessons.additionals}}</p>
+    <h2>Матерал урока</h2>
+    <p><strong>Название урока:</strong> {{ lesson.topic }}</p>
+    <p><strong>Дата урока:</strong> {{ lesson.data }}</p>
+    {% if lesson.additionals %}
+      <p><strong>Дополнительные материалы:</strong> 
+        <br> {{ lesson.additionals }} 
+      </p>
     {% endif %}
-    <hr>
-    <h5>Домашнее задание</h5>
-    <p>{{lessons.home_work}}</p>
-    {% if lessons.email%}
-    <br>
-    <h5>Присылайте дз на почту -
-        <a href="mailto:{{lessons.email}}">{{lessons.email}}</a>
-    </h5>
-    {% endif %}
-    {% if user.role == 'T'%}
+    <p><strong>Домашнее задание:</strong> {{ lesson.home_work }}</p>
+    {% if lesson.email %}
+      <a href="mailto:{{lessons.email}}"><strong>Email учителя:</strong> {{ lesson.email }}</a>
     {% endif %}
 </div>
+{% else %}
+<div class="container">
+    <h2>Изменение урока</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="lessonDate">Дата урока:</label>
+          <input type="date" class="form-control" id="lessonDate" name="data" value="{{ lesson.data|date:'Y-m-d'  }}">
+        </div>
+        <div class="form-group">
+          <label for="lessonTopic">Тема урока:</label>
+          <textarea class="form-control" id="lessonTopic" name="topic" rows="3">{{ lesson.topic }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="additionalMaterials">Дополнительные материалы:</label>
+          <textarea class="form-control" id="additionalMaterials" name="additionals" rows="3">{{ lesson.additionals }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="homework">Домашнее задание:</label>
+          <textarea class="form-control" id="homework" name="home_work" rows="3">{{ lesson.home_work }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="authorEmail">Email автора:</label>
+          <input type="email" class="form-control" id="authorEmail" name="email" value="{{ lesson.email }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+      </form>
+  </div>
+
+{% endif %}
+
 {% endblock content %}

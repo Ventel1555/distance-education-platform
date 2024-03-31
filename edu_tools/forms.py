@@ -22,9 +22,9 @@ class LessonsForm(forms.ModelForm):
         model = Lessons
         fields = ['topic', 'additionals', 'home_work', 'data', 'email']
 
-    class_field = forms.ModelChoiceField(queryset=Subjects.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+    class_field = forms.ModelChoiceField(label='Предмет - Класс', queryset=Subjects.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
     topic = forms.CharField(label='Тема', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    additionals = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'form-control'}))
-    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    additionals = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
+    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}), required=False)
     home_work = forms.CharField(label='Домашнее задание', widget=forms.Textarea(attrs={'class': 'form-control'}))
     data = forms.DateField(label='Выберите дату', widget=DateInput(attrs={'class': 'form-control', 'type': 'date'}))

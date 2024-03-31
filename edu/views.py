@@ -1,15 +1,28 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Lessons
+from edu.forms import LessonForm
+from django.contrib import messages
 # в дальнейшем использовать LoginRequiredMixin
 # urls for main_html dir
 def home(request):
     return render(request, "main_html/add_base.html")
 
-class DetailLessonView(LoginRequiredMixin, DetailView):
-    model = Lessons
+@login_required
+def lesson_detail(request, lesson_id):
+    lesson = get_object_or_404(Lessons, pk=lesson_id)
+    form = None
+    if request.user.is_staff:
+        if request.method == "POST":
+            form = LessonForm(request.POST, instance=lesson)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения сохранены')
+        else:
+            form = LessonForm(instance=lesson)
+    return render(request, 'detail_lesson.html', {'lesson': lesson, 'form': form})
     
 # Student
 def students(request):
@@ -24,7 +37,6 @@ def list_homework_view(request):
         sub_name = request.GET.get('sub_name') or None
         if sub_name != None:
             lessons = subjects.get(name=sub_name).lesson_id.all()
-            pass
         context = {
             'lessons': None if sub_name==None else lessons,
             'subjects': subjects,

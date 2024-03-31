@@ -47,7 +47,6 @@ def edu_program(request):
                 )
                 
                 subject = Subjects.objects.get(id=request.POST.get('class_field'))
-                print(subject, lesson)
                 subject.lesson_id.add(lesson)
                 subject.save()
                 messages.success(request, 'Запись успешно создана')
