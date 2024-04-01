@@ -25,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     subjects_id = models.ManyToManyField(Subjects, verbose_name=_('Доступы к предметам'), blank=True)
     is_active = models.BooleanField(_('Активный'), default=True)
     role = models.CharField(_('Роль'), max_length=8, choices=CHOICES_ROLE, blank=True)
-    feedback = models.BooleanField(_('Доступ к обрат. связи'), default=False)
+    # feedback = models.BooleanField(_('Доступ к обрат. связи'), default=False)
     # need to discusings!!!...
 
     objects = UserManager()

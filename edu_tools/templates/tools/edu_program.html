@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <!-- url 'add_lesson'  -->
 <div class="container">
-  <h1>Изменение программы</h1>
+  <h1>Создать новый урок</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Создать</button>
