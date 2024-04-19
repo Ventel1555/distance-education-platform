@@ -23,9 +23,9 @@ class LessonsForm(forms.ModelForm):
         fields = ['topic', 'additionals', 'home_work', 'data', 'email', 'document']
 
     class_field = forms.ModelChoiceField(label='Предмет - Класс', queryset=Subjects.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
-    topic = forms.CharField(label='Тема', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    topic = forms.CharField(label='Тема', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Тема урока"}))
     additionals = forms.CharField(label='Описание', widget=forms.Textarea({'class': 'form-control', 'rows': 3}), required=False)
-    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}), required=False)
+    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': "name@example.com"},), required=False)
     home_work = forms.CharField(label='Домашнее задание', widget=forms.Textarea({'class': 'form-control', 'rows': 3}))
     data = forms.DateField(label='Выберите дату', widget=DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     document = forms.FileField(label='Файл урока', widget=forms.FileInput(attrs={'class': 'form-control'}), required=False)

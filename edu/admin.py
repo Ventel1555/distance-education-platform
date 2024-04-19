@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from .models import Classes, Subjects, Lessons
-from django.db import models
 
 @admin.register(Classes)
 class ClassesAdmin(admin.ModelAdmin):

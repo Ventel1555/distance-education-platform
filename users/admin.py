@@ -9,3 +9,5 @@ class CustomUserAdmin(admin.ModelAdmin):
     fields = [('first_name', 'last_name'), 'patronymic', ('login', 'password'), 'email', 'classes_id', 'subjects_id', ('role', 'is_active', 'is_superuser') ]
     search_fields = ["last_name"]
     search_help_text = 'Тут работает поиск пользователя по фамилии'
+    filter_horizontal = ('subjects_id',)
+    

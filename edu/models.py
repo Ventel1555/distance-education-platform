@@ -15,7 +15,7 @@ class Lessons(models.Model):
     additionals = models.TextField(verbose_name='Дополнительные материалы', blank=True, null=True, help_text='Это не обязательное поле')
     home_work = models.TextField(verbose_name='Домашняя работа')
     email = models.EmailField(blank=True, verbose_name='Почта учителя', help_text='Это не обязательное поле')
-    document = models.FileField(blank=False, null=True, upload_to=user_directory_path, verbose_name='Файлы урока', help_text='Это не обязательное поле')
+    document = models.FileField(blank=True, null=True, upload_to=user_directory_path, verbose_name='Файлы урока', help_text='Это не обязательное поле')
     
     class Meta:
         verbose_name = 'Урок'
